@@ -182,37 +182,7 @@ var drawingApp = (function () {
 			}
 
 			//clearCanvas();
-
-			if (curTool === "crayon") {
-
-				// Draw the crayon tool background
-				context.drawImage(crayonBackgroundImage, 0, 0, canvasWidth, canvasHeight);
-
-				// Draw purple crayon
-				selected = (curColor === colorPurple);
-				locX = selected ? 18 : 52;
-				locY = 19;
-				drawCrayon(locX, locY, colorPurple, selected);
-
-				// Draw green crayon
-				selected = (curColor === colorGreen);
-				locX = selected ? 18 : 52;
-				locY += 46;
-				drawCrayon(locX, locY, colorGreen, selected);
-
-				// Draw yellow crayon
-				selected = (curColor === colorYellow);
-				locX = selected ? 18 : 52;
-				locY += 46;
-				drawCrayon(locX, locY, colorYellow, selected);
-
-				// Draw brown crayon
-				selected = (curColor === colorBrown);
-				locX = selected ? 18 : 52;
-				locY += 46;
-				drawCrayon(locX, locY, colorBrown, selected);
-
-			} else if (curTool === "marker") {
+			if (curTool === "marker") {
 
 				// Draw the marker tool background
 				context.drawImage(markerBackgroundImage, 0, 0, canvasWidth, canvasHeight);
@@ -346,13 +316,6 @@ var drawingApp = (function () {
 
 					clearClick();
 				}
-			}
-
-			// Overlay a crayon texture (if the current tool is crayon)
-			if (curTool === "crayon") {
-				contexts.texture.canvas.style.display = "block";
-			} else {
-				contexts.texture.canvas.style.display = "none";
 			}
 		},
 
@@ -614,12 +577,6 @@ var drawingApp = (function () {
 						paint = false;
 						redraw();
 					}
-				},
-
-				cancelDrawing = function () {
-					if (curTool === "bucket") {
-						paint = false;
-					}
 				};
 
 			// Add mouse event listeners to canvas element
@@ -638,13 +595,13 @@ var drawingApp = (function () {
 			contexts.outline.canvas.addEventListener("mousedown", pressDrawing, false);
 			contexts.outline.canvas.addEventListener("mousemove", dragDrawing, false);
 			contexts.outline.canvas.addEventListener("mouseup", releaseDrawing);
-			contexts.outline.canvas.addEventListener("mouseout", cancelDrawing, false);
+		//	contexts.outline.canvas.addEventListener("mouseout", cancelDrawing, false);
 
 			// Add touch event listeners to canvas element
 			contexts.outline.canvas.addEventListener("touchstart", pressDrawing, false);
 			contexts.outline.canvas.addEventListener("touchmove", dragDrawing, false);
 			contexts.outline.canvas.addEventListener("touchend", releaseDrawing, false);
-			contexts.outline.canvas.addEventListener("touchcancel", cancelDrawing, false);
+		//	contexts.outline.canvas.addEventListener("touchcancel", cancelDrawing, false);
 		},
 
 		// Calls the redraw function after all neccessary resources are loaded.
