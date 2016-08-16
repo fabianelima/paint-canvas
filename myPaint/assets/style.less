@@ -12,12 +12,49 @@
 	background: #f3f3f3;
 
 	#canvas-div {
+		width: 100%;
 		max-width: 800px;
-		border: 1px solid #ff0000;
+		height: 100%;
+		max-height: 800px;
 		background: #ffffff;
+		position: relative;
+		border: 6px solid #f3f3f3;
 	}
 
 	#toolbox {
 		float: right;
+		width: 22%;
+		margin: 1%;
+
+		.colors, .sizes {
+			margin-bottom: 10%;
+		}
+
+		.colors {
+			padding-bottom: 20%;
+		}
+
+		.c {
+			border: 3px solid #fff;
+			border-radius: 50%;
+			cursor: pointer;
+			padding: 2%;
+			margin: 1%;
+			width: 10%;
+			text-align: center;
+			float: left;
+		}
+
+		.color-black { background: #000000; }
+		.color-green { background: #0BB200; }
+		.color-yellow { background: #FFCF40; }
+		.color-blue { background: #2F54FF; }
+		.color-red { background: #E04F2B; }
+
+		.s, .tool {
+			cursor: pointer;
+		}
+
+		.s img, .tool img { margin-right: 2%; }
 	}
 }

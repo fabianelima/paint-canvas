@@ -9,16 +9,22 @@
 <body>
 	<div id="container">
 		<div id="toolbox">
-			<button class="clear-canvas">Apagar tudo</button><br/>
-			<button class="color-black">Preto</button><br/>
-			<button class="color-green">Verde</button><br/>
-			<button class="color-yellow">Amarelo</button><br/>
-			<button class="color-blue">Azul</button><br/>
-			<button class="color-red">Vermelho</button><br/>
-			<button class="size-small">Pequeno</button><br/>
-			<button class="size-medium">Médio</button><br/>
-			<button class="size-large">Grande</button><br/>
-			<button class="eraser">Apagador</button>
+			<div class="colors">
+				<h3>Cores</h3>
+				<div class="c color-black">&nbsp;</div>
+				<div class="c color-green">&nbsp;</div>
+				<div class="c color-yellow">&nbsp;</div>
+				<div class="c color-blue">&nbsp;</div>
+				<div class="c color-red">&nbsp;</div>
+			</div>
+			<div class="sizes">
+				<h3>Espessura do traço</h3>
+				<div class="s size-small"><img src="assets/esp1.png">Pequena</div>
+				<div class="s size-medium"><img src="assets/esp2.png">Média</div>
+				<div class="s size-large"><img src="assets/esp3.png">Grande</div>
+			</div>
+			<div class="tool eraser"><img src="assets/eraser.png">Borracha</div>
+			<div class="tool clear-canvas"><img src="assets/novo.png">Novo desenho</div>
 		</div>
 		<div id="canvas-div"></div>
 	</div>

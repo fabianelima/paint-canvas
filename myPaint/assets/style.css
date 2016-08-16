@@ -18,10 +18,56 @@
   background: #f3f3f3;
 }
 #container #canvas-div {
+  width: 100%;
   max-width: 800px;
-  border: 1px solid #ff0000;
+  height: 100%;
+  max-height: 800px;
   background: #ffffff;
+  position: relative;
+  border: 6px solid #f3f3f3;
 }
 #container #toolbox {
   float: right;
+  width: 22%;
+  margin: 1%;
+}
+#container #toolbox .colors,
+#container #toolbox .sizes {
+  margin-bottom: 10%;
+}
+#container #toolbox .colors {
+  padding-bottom: 20%;
+}
+#container #toolbox .c {
+  border: 3px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 2%;
+  margin: 1%;
+  width: 10%;
+  text-align: center;
+  float: left;
+}
+#container #toolbox .color-black {
+  background: #000000;
+}
+#container #toolbox .color-green {
+  background: #0BB200;
+}
+#container #toolbox .color-yellow {
+  background: #FFCF40;
+}
+#container #toolbox .color-blue {
+  background: #2F54FF;
+}
+#container #toolbox .color-red {
+  background: #E04F2B;
+}
+#container #toolbox .s,
+#container #toolbox .tool {
+  cursor: pointer;
+}
+#container #toolbox .s img,
+#container #toolbox .tool img {
+  margin-right: 2%;
 }

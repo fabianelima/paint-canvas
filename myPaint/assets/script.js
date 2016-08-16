@@ -3,23 +3,26 @@
 /*
 	CANVAS PAINTER 1.0
 	------------------------------------------------
-	Livremente adaptado do tutorial de William Malone: http://www.williammalone.com/articles/create-html5-canvas-javascript-drawing-app/#demo-simple
+	Livremente adaptado do tutorial de William Malone: 
+	http://www.williammalone.com/articles/create-html5-canvas-javascript-drawing-app
 	
 	Código: Fabiane Lima
-	Arte: Fabiane Lima [por enquanto]
+	Arte: Fabiane Lima
 	------------------------------------------------
-	PROBLEMAS CONHECIDOS:
-	- Quando se troca a espessura do pincel, o desenho do canvas inteiro troca de espessura.
-	- Quando se apaga tudo com o botão 'Apagar tudo' [er] e depois se troca de cor, ele demora até 'se tocar' de que outra cor foi escolhida.
+	FUTUROS RECURSOS:
+	- Desenhar formas geométricas: retângulo, círculo, triângulo.
 */
 
 $(function() {
+	/* preparando o terreno */
 	var canvasDiv = document.getElementById('canvas-div');
-	var clickX = new Array();
-	var clickY = new Array();
-	var clickDrag = new Array();
+	var clickX = [];
+	var clickY = [];
+	var clickDrag = [];
 	var paint;
 
+
+	/* paleta de cores e espessura do traço */
 	var colorBlack = '#000000';
 	var colorGreen = '#0BB200';
 	var colorYellow = '#FFCF40';
@@ -28,11 +31,13 @@ $(function() {
 	var eraser = '#FFFFFF';
 
 	var curColor = colorBlack;
-	var clickColor = new Array();
+	var clickColor = [];
 
-	var clickSize = new Array();
+	var clickSize = [];
 	var curSize = 'small';
 
+
+	/* o canvas propriamente dito */
 	canvas = document.createElement('canvas');
 	canvas.setAttribute('width', 800);
 	canvas.setAttribute('height', 600);
@@ -44,6 +49,8 @@ $(function() {
 	}
 	context = canvas.getContext("2d");
 
+
+	/* posição do mouse no container */
 	$('#container').on('mousedown', function(e){
 		var mouseX = e.pageX - this.offsetLeft;
 		var mouseY = e.pageY - this.offsetTop;
@@ -68,12 +75,14 @@ $(function() {
 	});
 
 
-	/* ---------------------------------------- botões ---------------------------------------- */
+	/* botões */
 	$('.clear-canvas').on('click', function(e) {
-			clickX = new Array();
-			clickY = new Array();
-			clickDrag = new Array();
-			clearCanvas();
+		clickX = [];
+		clickY = [];
+		clickDrag = [];
+		clickColor = [];
+		clickSize = [];
+		clearCanvas();
 	});
 
 	$('.color-black').on('mousedown', function(e) {
@@ -112,9 +121,8 @@ $(function() {
 		curColor = eraser;
 	});
 
-	/* ---------------------------------------------------------------------------------------- */
 
-
+	/* função que gerencia o clicar/arrastar */
 	function addClick(x, y, dragging) {
 		clickX.push(x);
 		clickY.push(y);
@@ -123,27 +131,25 @@ $(function() {
 		clickSize.push(curSize);
 	}
 
+
+	/* função que redesenha o canvas a cada novo clique e opção */
 	function redraw() {
 		clearCanvas();
-
-		var radius;
 
 		context.strokeStyle = curColor;
 		context.lineJoin = 'round';
 
-		switch (curSize) {
-			case 'small':
-				radius = 3;
-				break;
-			case 'medium':
-				radius = 7;
-				break;
-			case 'large':
-				radius = 16;
-				break;
-		}
-
 		for (i = 0; i < clickX.length; i++) {
+			if (clickSize[i] == 'small') {
+				radius = 3
+			}
+			else if (clickSize[i] == 'medium') {
+				radius = 7
+			}
+			else if (clickSize[i] == 'large') {
+				radius = 16
+			}
+
 			context.beginPath();
 			
 			if (clickDrag[i] && i) {
@@ -161,6 +167,8 @@ $(function() {
 		}
 	}
 
+
+	/* função que limpa o canvas */
 	function clearCanvas() {
 		context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 	}
