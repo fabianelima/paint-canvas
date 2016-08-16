@@ -30,11 +30,14 @@ $(function() {
 	var colorRed = '#E04F2B';
 	var eraser = '#FFFFFF';
 
-	var curColor = colorBlack;
 	var clickColor = [];
+	var curColor = colorBlack;
 
 	var clickSize = [];
 	var curSize = 'small';
+
+	var clickTool = [];
+	var curTool = 'pencil';
 
 
 	/* o canvas propriamente dito */
@@ -82,44 +85,22 @@ $(function() {
 		clickDrag = [];
 		clickColor = [];
 		clickSize = [];
+		clickTool = [];
 		clearCanvas();
 	});
 
-	$('.color-black').on('mousedown', function(e) {
-		curColor = colorBlack;
-	});
-
-	$('.color-green').on('mousedown', function(e) {
-		curColor = colorGreen;
-	});
-
-	$('.color-yellow').on('mousedown', function(e) {
-		curColor = colorYellow;
-	});
-
-	$('.color-blue').on('mousedown', function(e) {
-		curColor = colorBlue;
-	});
-
-	$('.color-red').on('mousedown', function(e) {
-		curColor = colorRed;
-	});
-
-	$('.size-small').on('mousedown', function(e) {
-		curSize = 'small';
-	});
-
-	$('.size-medium').on('mousedown', function(e) {
-		curSize = 'medium';
-	});
-
-	$('.size-large').on('mousedown', function(e) {
-		curSize = 'large';
-	});
-
-	$('.eraser').on('mousedown', function(e) {
-		curColor = eraser;
-	});
+	$('.color-black').on('mousedown', function(e) {		curColor = colorBlack;		});
+	$('.color-green').on('mousedown', function(e) {		curColor = colorGreen;		});
+	$('.color-yellow').on('mousedown', function(e) {	curColor = colorYellow;		});
+	$('.color-blue').on('mousedown', function(e) {		curColor = colorBlue;		});
+	$('.color-red').on('mousedown', function(e) {		curColor = colorRed;		});
+	$('.size-small').on('mousedown', function(e) {		curSize = 'small';			});
+	$('.size-medium').on('mousedown', function(e) {		curSize = 'medium';			});
+	$('.size-large').on('mousedown', function(e) {		curSize = 'large';			});
+	$('.eraser').on('mousedown', function(e) {			curColor = eraser;			});
+	$('.tool-pencil').on('mousedown', function(e) {		curTool = 'pencil';			});
+	$('.tool-rect').on('mousedown', function(e) {		curTool = 'rect';			});
+	$('.tool-circ').on('mousedown', function(e) {		curTool = 'circ';			});
 
 
 	/* função que gerencia o clicar/arrastar */
@@ -129,6 +110,7 @@ $(function() {
 		clickDrag.push(dragging);
 		clickColor.push(curColor);
 		clickSize.push(curSize);
+		clickTool.push(curTool);
 	}
 
 
@@ -164,6 +146,22 @@ $(function() {
 			context.strokeStyle = clickColor[i];
 			context.lineWidth = radius;
 			context.stroke();
+
+			if (clickTool[i] == 'rect') {				// Se eu descobrir como acerta esse trecho, mato a charada.
+				var x = Math.min(clickX[i], clickX[i]),
+				y = Math.min(clickY[i], clickY[i]),
+				w = Math.abs(clickX[i] - clickY[i]),
+				h = Math.abs(clickY[i] - clickX[i]);
+				clearCanvas();
+				context.strokeRect(x, y, w, h);
+			}
+			if (clickTool[i] == 'circ') {				// Se eu descobrir como acerta esse trecho, mato a charada.
+				centerX = canvas.width / 2;
+				centerY = canvas.height / 2;
+				rad = 70;
+				clearCanvas();
+				context.arc(centerX, centerY, rad, 0, 2 * Math.PI, false);
+			}
 		}
 	}
 
