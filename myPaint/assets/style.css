@@ -71,3 +71,6 @@
 #container #toolbox .tool img {
   margin-right: 2%;
 }
+#container #toolbox .selected {
+  background: #778899;
+}

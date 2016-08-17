@@ -47,6 +47,7 @@ $(function() {
 	canvas.setAttribute('id', 'canvas');
 	canvasDiv.appendChild(canvas);
 
+
 	if (typeof G_vmlCanvasManager != 'undefined') {
 		canvas = G_vmlCanvasManager.initElement(canvas);
 	}
@@ -55,8 +56,6 @@ $(function() {
 
 	/* posição do mouse no container */
 	$('#container').on('mousedown', function(e){
-		var mouseX = e.pageX - this.offsetLeft;
-		var mouseY = e.pageY - this.offsetTop;
 		paint = true;
 		addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
 		redraw();
@@ -148,20 +147,21 @@ $(function() {
 			context.stroke();
 
 			if (clickTool[i] == 'rect') {				// Se eu descobrir como acerta esse trecho, mato a charada.
-				var x = Math.min(clickX[i], clickX[i]),
-				y = Math.min(clickY[i], clickY[i]),
-				w = Math.abs(clickX[i] - clickY[i]),
-				h = Math.abs(clickY[i] - clickX[i]);
 				clearCanvas();
+				var x = clickX[i];
+				var y = clickY[i];
+				var w = canvas.width - clickX[i];
+				var h = canvas.height - clickY[i];
 				context.strokeRect(x, y, w, h);
 			}
-			if (clickTool[i] == 'circ') {				// Se eu descobrir como acerta esse trecho, mato a charada.
+
+			/*if (clickTool[i] == 'circ') {				// Se eu descobrir como acerta esse trecho, mato a charada.
 				centerX = canvas.width / 2;
 				centerY = canvas.height / 2;
 				rad = 70;
 				clearCanvas();
-				context.arc(centerX, centerY, rad, 0, 2 * Math.PI, false);
-			}
+				context.arc(clickX, clickY, rad, 0, (2 * Math.PI), false);
+			}*/
 		}
 	}
 
